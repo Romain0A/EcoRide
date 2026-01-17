@@ -1,8 +1,8 @@
  #config/routes/annotations.yaml
- controllers:
-    resource: ../../src/Controller
-    type: annotation
+controllers:
+   resource: ../../src/Controller
+   type: attribute
 
- kernel:
-     resource: ../../src/kernel.php
-     type: annotation
+kernel:
+   resource: ../../src/kernel.php
+   type: attribute
