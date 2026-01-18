@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% set centre = '<input type="search" id="bar_recherche"/>' %}
+
+{% block title %}
+    Accueil
+{% endblock %}
+
+{% block body %}
+    {% include 'header.html.twig' %}
+    <hbox>
+        <img src='img\pexels-kindelmedia-8550825.jpg' alt="Photo de deux personnes à l'avant d'une voiture, prise depuis le siège arrière"/>
+        <vbox>
+            <p>
+                EcoRide est une startup dont le but est de réduire l'impact environnemental des déplacements en vous aidant à trouver le bon covoiturage pour vous et pour la planète, des covoiturages à la fois économiques et écologiques.
+            </p>
+            <p>
+                Afin de faire cela, nous mettons à votre disposition un outil de recherche de covoiturage vous permettant de trouver vos trajets et de voir parmi les covoiturages proposés ceux qui sont écologiques et bons pour la planète.
+            </p>
+            <p>
+                Et si vous faites un trajet tout en ayant des places libres, n'hésitez pas à vous inscrire comme chauffeur et à prendre des covoitureurs, car ce n'est pas que la planète qui vous remerciera.
+            </p>
+        </vbox>
+    </hbox>
+    <hbox>
+        <vbox>
+            <p>
+                Notre ambition est de devenir la principale plateforme de covoiturage pour les voyageurs soucieux de l'environnement et ceux qui recherchent une solution économique pour leurs déplacements.
+            </p>
+            <p>
+                En effet, rien ne tient plus à cœur à notre groupe que notre planète et son environnement, or les émissions carbone de nos transports représentent un tiers des émissions carbone en France. Et cela n'est qu'empiré par les bouchons et autres problèmes de circulation causés par le nombre de voitures.
+            </p>
+            <p>
+                C'est pour cela que nous cherchons à encourager le covoiturage afin de protéger notre environnement et par la même occasion permettre des trajets plus économes pour notre porte-feuille et également plus conviviaux.
+            </p>
+        </vbox>
+        <img src='img\pexels-kindelmedia-9799998.jpg' alt="Photo d'une voiture électrique noire en train d'être rechargée sur un parking"/>
+    </hbox>
+    <footer>
+        <p>
+            EcoRide@gmail.fr
+        </p>
+        <a href="/mention">Mention légale</a>
+    </footer>
+{% endblock %}
+
