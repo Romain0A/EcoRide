@@ -3,7 +3,7 @@
         <h1>EcoRide</h1> 
     </div>
 
-    <div id="centreHeader"> {{ centre|default('')|raw }} </div>
+    <div id="centreHeader"> {% block centre %}{% endblock %} </div>
 
     <div id="menu">
         <a href="/accueil"><img src="img\icones\material-symbols--cottage-rounded.png" alt="icone de l'acueil"/></a>

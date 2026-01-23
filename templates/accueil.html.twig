@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% set centre = '<input type="search" id="bar_recherche"/>' %}
-
 {% block title %}
     Accueil
 {% endblock %}
 
 {% block body %}
-    {% include 'header.html.twig' %}
+    {% embed 'header.html.twig' %}
+        {% block centre %}
+            <input type="search" id="bar_recherche"/>
+        {% endblock %}
+    {% endembed %}
+    
     <hbox>
         <img src='img\pexels-kindelmedia-8550825.jpg' alt="Photo de deux personnes à l'avant d'une voiture, prise depuis le siège arrière"/>
         <vbox>
