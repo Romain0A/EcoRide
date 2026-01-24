@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Covoiturages
+{% endblock %}
+
+{% block body %}
+    {% embed 'header.html.twig' %}
+        {% block centre %}
+            <input type"text" id="depart" placeholder="Départ">
+            <input type"text" id="arrivee" placeholder="Arrivée">
+            <input name="date" type="date">
+        {% endblock %}
+    {% endembed %}
+
+    <div id='trie'>
+        <input type"number" name="prixMax" placeholder="prix Max">
+        <input type"number" name="noteMin" placeholder="note Min">
+        <input type"number" name="dureeMax" placeholder="duree Max">
+        <div>
+            <label for="ecologique">ecologique</label>
+            <input name="ecologique" type="checkbox">
+        </div>
+    </div>
+
+    <div id="listCovoiturage">
+    {% for covoiturage in covoiturages %}
+        {% include 'covoiturage.html.twig' %}
+    {% endfor %}
+    </div>
+{% endblock %}
