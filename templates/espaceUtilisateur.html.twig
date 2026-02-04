@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Espace
+{% endblock %}
+
+{% block body %}
+    {% embed 'header.html.twig' %}
+        {% block centre %} <p class="section wrap"> vous etes {{ utilisateur.roleLibelle }} </p> {% endblock %}
+    {% endembed %}
+    <div class="scrolable">
+
+        <div class="section">
+            <div class="vbox wrap">
+                <img class="pfp img_petite" src={{ utilisateur.pfp }} />
+                <p>Pseudo:<br/> {{ utilisateur.pseudo }}</p>
+                <p>Prenom:<br/> {{ utilisateur.prenom }}</p>
+                <p>Nom:<br/> {{ utilisateur.nom }}</p>
+                <p>Email:<br/> {{ utilisateur.email }}</p>
+                <p>Adresse:<br/> {{ utilisateur.adresse }}</p>
+                <p>Telephone:<br/> {{ utilisateur.telephone }}</p>
+                <p>Date de naissance:<br/> {{ utilisateur.dateNaissance }}</p>
+            </div>
+            <input type="button" id="info" value="changer mes info"/>
+            <input type="button" id="mdp" value="Changer mon mot de passe"/>
+        </div>
+
+        {% if utilisateur.roleId == 2 or utilisateur.roleId == 3 %}
+            <div class="vbox wrap">
+                <div class="section">
+                    <p><b>Vos preferences:</b></p>
+                    <p>{{ utilisateur.preferences }}</p>
+                    <input type="button" id="preferences" value="changer mes preferences"/>
+                </div>
+                <div class="section">
+                    <p><b>Vos voitures:</b></p>
+                    {% for voiture in utilisateur.voitures %}
+                        <div class="voiture">
+                            <p>Imatriculation: {{ voiture.imatriculation }} </p>
+                            <p>Date de premiere imatriculation: {{ voiture.dpi }} </p>
+                            <p>Modele du vehicule: {{ voiture.modele }} </p>
+                            <p>Couleur du vehicule: {{ voiture.couleur }} </p>
+                            <p>Marque du vehicule: {{ voiture.marque }} </p>
+                            <p>Nombre de place: {{ voiture.place }} </p>
+                        </div>
+                    {% endfor %}
+                    <input type="button" id="voitures" value="changer mes voitures"/>
+                </div>
+                <div id="nVoyage" class="section wrap">
+                    <p><b>Nouveau voyage</b></p>
+                    <input type="text" id="nv_depart" placeholder="Depart"/>
+                    <input type="text" id="nv_arrivee" placeholder="Arrivée"/><br/>
+                    <input type="date" id="nv_date"/>
+                    <input type="text" id="nv_heure_depart" placeholder="Heure depart"/><br/>
+                    <input type="text" id="nv_heure_arrivee" placeholder="Heure arrivée"/>
+                    <input type="text" id="nv_vehicule" placeholder="Vehicule"/><br/>
+                    <input type="text" id="nv_prix" placeholder="Prix"/><br/><br/>
+                    <input type="button" id="nouveau_voyage" value="Confirmer"/>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if utilisateur.roleId != 0 %}
+            <div class="section scrolable">
+                {% for covoiturage in covoiturages %}
+                    <div class="sous_section vbox_evenly wrap">
+                        {% include 'covoiturage.html.twig' %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}
