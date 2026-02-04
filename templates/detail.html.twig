@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Detail Covoiturage
+{% endblock %}
+
+{% block body %}
+    {% embed 'header.html.twig' %}
+        {% block centre %}
+            <p id="resumer" class="section">{{ detail.lieuDepart }} - {{ detail.lieuArrivee }} ; {{ detail.heureDepart }} - {{ detail.heureArrivee }} ; {{ detail.place }} place restante ; {{ detail.prix }} credit</p>
+        {% endblock %}
+    {% endembed %}
+
+    <div class="vbox">
+        <div id="chauffeur" class="section">
+            <div class="vboxleft">
+                <img class="pfp img_petite" src={{ detail.pfp }} />
+                <p>
+                    {{ detail.chauffeur }}
+                    <br/>
+                    {% for i in 1..5 %}
+                        {% if i <= detail.note %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </div><br/>
+            <p>
+                preference:<br/>{{ detail.preference }}
+            </p>
+        </div>
+
+        <div id="vehicule" class="section">
+            <p>vehicule:</p>
+            <p>Modele: {{ detail.modele }}</br>Marque: {{ detail.marque }}</br>Couleur: {{ detail.couleur }}</br>Energie: {{ detail.energie }}</p>
+        </div>
+    </div>
+
+    <div id="avisList" class="scrolable section">
+        {% for avis in detail.avis %}
+            {% include 'avis.html.twig' %}
+        {% endfor %}
+    </div>
+
+    <input type="button" id="participer" class="section" value="participer"/>
+
+{% endblock %}
