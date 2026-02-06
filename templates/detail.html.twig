@@ -7,7 +7,7 @@
 {% block body %}
     {% embed 'header.html.twig' %}
         {% block centre %}
-            <p id="resumer" class="section">{{ detail.lieuDepart }} - {{ detail.lieuArrivee }} ; {{ detail.heureDepart }} - {{ detail.heureArrivee }} ; {{ detail.place }} place restante ; {{ detail.prix }} credit</p>
+            <p id="resumer" class="section">{{ detail.lieuDepart }} - {{ detail.lieuArrivee }} ; {{ detail.dateDepart }} - {{ detail.dateArrivee }} ; {{ detail.heureDepart }} - {{ detail.heureArrivee }} ; {{ detail.place }} place restante ; {{ detail.prix }} credit</p>
         {% endblock %}
     {% endembed %}
 
