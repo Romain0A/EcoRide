@@ -1,18 +1,17 @@
-<div id='covoiturage'>
-    <img class="pfp" src={{ covoiturage.pfp }} />
-    <p>{{ covoiturage.chauffeur }}
-    <br/>
-    {% for i in 1..5 %}
-        {% if i <= covoiturage.note %}
-            ★
-        {% else %}
-            ☆
-        {% endif %}
-    {% endfor %}</p>
-    <p>Place restante:<br/>{{ covoiturage.place }}</p>
-    <p>Prix voyage:<br/>{{ covoiturage.prix }} crédit</p>
-    <p>Départ:<br/>{{ covoiturage.depart }}</p>
-    <p>Arrivée:<br/>{{ covoiturage.arrivee }}</p>
-    <p>Voyage<br/>{{ covoiturage.ecologique ? 'écologique' : 'non écologique' }}</p>
-    <a href="/detail?id={{ covoiturage.id }}"><img src='img\icones\material-symbols--lists-rounded.png' alt='Details'/></a>
-</div>
+<img class="pfp img_petite" src={{ covoiturage.pfp }} />
+<p>{{ covoiturage.chauffeur }}
+<br/>
+{% for i in 1..5 %}
+    {% if i <= covoiturage.note %}
+        ★
+    {% else %}
+        ☆
+    {% endif %}
+{% endfor %}</p>
+<p>Place restante:<br/>{{ covoiturage.place }}</p>
+<p>Prix voyage:<br/>{{ covoiturage.prix }} crédit</p>
+<p>Départ:<br/>{{ covoiturage.dateDepart }}<br/>{{ covoiturage.heureDepart }}</p>
+<p>Arrivée:<br/>{{ covoiturage.dateArrivee }}<br/>{{ covoiturage.heureDepart }}</p>
+<p>Voyage<br/>{{ covoiturage.ecologique ? 'écologique' : 'non écologique' }}</p>
+{% block status %} {% endblock %}
+<a href="/detail?id={{ covoiturage.id }}"><img class="img_petite" src='img\icones\material-symbols--lists-rounded.png' alt='Details'/></a>
