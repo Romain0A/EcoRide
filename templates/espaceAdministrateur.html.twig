@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Espace Administrateur
+{% endblock %}
+
+{% block body %}
+
+    {% embed 'header.html.twig' %} {% endembed %}
+    
+    <div class="vbox wrap">
+        <div class="section">
+            <p>Nombre de covoiturage</p>
+            {{ render_chart(grapheCredits) }}
+        </div>
+
+        <div class="section">
+            <p>Crédit gagner</p>
+            {{ render_chart(grapheCovoiturage) }}
+            <p>Total: </p>
+        </div>
+    </div>
+
+    <div class="section vbox_evenly">
+        <input type="text" id="nomCreation" placeholder="Nom compte"/>
+        <input type="text" id="emailCreation" placeholder="Email compte"/>
+        <input type="button" id="creationCompteEmploye" value="Crée compte employé"/>
+    </div>
+
+    <div class="section vbox_evenly">
+        <input type="text" id="nomSuppresion" placeholder="Nom compte"/>
+        <input type="text" id="emailSuppresion" placeholder="Email compte"/>
+        <input type="button" id="suppresionCompte" value="Supprimer le compte"/>
+    </div>
+
+{% endblock %}
