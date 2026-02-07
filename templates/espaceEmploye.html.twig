@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Espace employe
+{% endblock %}
+
+{% block body %}
+    {% embed 'header.html.twig' %} {% endembed %}
+
+    <div class="section scrolable">
+        {% for avis in avis %}
+            {% embed 'avis.html.twig' %} 
+                {% block boutton_validation %}
+                    <div>
+                        <input type="button" id="accepter" value="accepter"/>
+                        <input type="button" id="refuser" value="refuser"/>
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        {% endfor %}
+    </div>
+
+    <div class="section scrolable">
+        {% for malPasse in malPasse %}
+            {% include 'malPasse.html.twig' %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
