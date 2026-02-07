@@ -1,0 +1,18 @@
+<div class="sous_section">
+    <div class="vbox_evenly wrap">
+        <p>Covoiturage:<br/>{{ malPasse.idCovoiturage }}</p>
+        <p>Conducteur:<br/>{{ malPasse.pseudoChauffeur }}</p>
+        <p>Mail chauffeur:<br/>{{ malPasse.mailChauffeur }}</p>
+        <p>Passager:<br/>{{ malPasse.pseudoPassager }}</p>
+        <p>Mail Passager:<br/>{{ malPasse.mailPassager }}</p>
+        <p>Depart prevu le:<br/>{{ malPasse.dateDepart }} a {{ malPasse.heureDepart }}</p>
+        <p>Arrivée prevu le:<br/>{{ malPasse.dateArrivee }} a {{ malPasse.heureArrivee }}</p>
+        <p>Depart le:<br/>{{ malPasse.debutTrajet }}</p>
+        <p>Arrivée le:<br/>{{ malPasse.finTrajet }}</p>
+        <p>Commentaire :<br/>{{ malPasse.commentaire }}</p>
+    </div>
+    <div class="vbox_evenly">
+        <input type="button" id="resoudre_chauffeur" value="Resoudre et payer le chauffeur"/>
+        <input type="button" id="resoudre_passager" value="Resoudre et rembourser le passager"/>
+    </div>
+</div>
