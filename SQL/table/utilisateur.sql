@@ -9,5 +9,6 @@ CREATE TABLE utilisateur(
     date_naissance varchar(50) not null,
     photo varchar(255) not null,
     note smallint not null,
-    roles json not null
+    roles json not null,
+    pseudo varchar(180) not null
 );
