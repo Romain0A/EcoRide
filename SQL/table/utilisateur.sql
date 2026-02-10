@@ -10,5 +10,7 @@ CREATE TABLE utilisateur(
     photo varchar(255) not null,
     note smallint not null,
     roles json not null,
-    pseudo varchar(180) not null
+    pseudo varchar(180) not null,
+
+    add constraint pseudo_unique unique (pseudo);
 );
