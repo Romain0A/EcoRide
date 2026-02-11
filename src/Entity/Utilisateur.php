@@ -88,6 +88,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'receveur')]
     private Collection $avis_recus;
 
+    #[ORM\Column]
+    private ?int $credit = 20;
+
     public function __construct()
     {
         $this->voitures = new ArrayCollection();
@@ -408,6 +411,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $avisRecu->setReceveur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCredit(): ?int
+    {
+        return $this->credit;
+    }
+
+    public function setCredit(int $credit): static
+    {
+        $this->credit = $credit;
 
         return $this;
     }
