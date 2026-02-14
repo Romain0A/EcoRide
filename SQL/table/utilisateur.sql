@@ -12,6 +12,7 @@ CREATE TABLE utilisateur(
     roles json not null,
     pseudo varchar(180) not null,
     credit integer not null,
+    preference varchar(255),
 
     add constraint pseudo_unique unique (pseudo);
 );
