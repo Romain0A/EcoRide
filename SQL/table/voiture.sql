@@ -7,7 +7,7 @@ create table voiture (
     date_premiere_immatriculation date not null,
     marque varchar(50) not null,
     utilisateur_id int not null,
-    nbPlace smallint not null,
+    nb_place smallint not null,
 
     constraint fk_voiture_utilisateur foreign key (utilisateur_id) references utilisateur(id)
 );
