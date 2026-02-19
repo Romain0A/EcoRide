@@ -1,18 +1,22 @@
 <div class="sous_section">
     <div class="vbox_evenly wrap">
-        <p>Covoiturage:<br/>{{ malPasse.idCovoiturage }}</p>
-        <p>Conducteur:<br/>{{ malPasse.pseudoChauffeur }}</p>
-        <p>Mail chauffeur:<br/>{{ malPasse.mailChauffeur }}</p>
-        <p>Passager:<br/>{{ malPasse.pseudoPassager }}</p>
-        <p>Mail Passager:<br/>{{ malPasse.mailPassager }}</p>
-        <p>Depart prevu le:<br/>{{ malPasse.dateDepart }} a {{ malPasse.heureDepart }}</p>
-        <p>Arrivée prevu le:<br/>{{ malPasse.dateArrivee }} a {{ malPasse.heureArrivee }}</p>
-        <p>Depart le:<br/>{{ malPasse.debutTrajet }}</p>
-        <p>Arrivée le:<br/>{{ malPasse.finTrajet }}</p>
+        <p>Covoiturage:<br/>{{ malPasse.covoiturage.id }}</p>
+        <p>Conducteur:<br/>{{ malPasse.receveur.pseudo }}</p>
+        <p>Mail chauffeur:<br/>{{ malPasse.receveur.email }}</p>
+        <p>Passager:<br/>{{ malPasse.poster.pseudo }}</p>
+        <p>Mail Passager:<br/>{{ malPasse.poster.email }}</p>
+        <p>Depart prevu le:<br/>{{ malPasse.covoiturage.dateDepart|date('d/m/Y') }} à {{ malPasse.covoiturage.heureDepart|date('H:i') }}</p>
+        <p>Arrivée prevu le:<br/>{{ malPasse.covoiturage.dateArrivee|date('d/m/Y') }} à {{ malPasse.covoiturage.heureArrivee|date('H:i') }}</p>
+        <p>Depart le:<br/>{{ malPasse.covoiturage.debutTrajet|date('d/m/Y H:i', 'Europe/Paris') }}</p>
+        <p>Arrivée le:<br/>{{ malPasse.covoiturage.finTrajet|date('d/m/Y H:i', 'Europe/Paris')  }}</p>
         <p>Commentaire :<br/>{{ malPasse.commentaire }}</p>
     </div>
     <div class="vbox_evenly">
-        <input type="button" id="resoudre_chauffeur" value="Resoudre et payer le chauffeur"/>
-        <input type="button" id="resoudre_passager" value="Resoudre et rembourser le passager"/>
+        <a href="{{ path('app_malpasse_chauffeur', {id: malPasse.id}) }}">
+            <button>Résoudre et payer le chauffeur</button>
+        </a>
+        <a href="{{ path('app_malpasse_passager', {id: malPasse.id}) }}">
+            <button>Résoudre et rembourser le passager</button>
+        </a>
     </div>
 </div>

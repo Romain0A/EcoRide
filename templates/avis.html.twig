@@ -1,7 +1,7 @@
 <div class="sous_section">
     <div class="vboxleft">
-        <img class="pfp img_petite" src={{ avis.pfp }} />
-        <p>{{ avis.pseudo }}
+        <img class="pfp img_petite" src="/{{ avis.poster.photo }}" />
+        <p>{{ avis.poster.pseudo }}
             <br/>
             {% for i in 1..5 %}
                 {% if i <= avis.note %}

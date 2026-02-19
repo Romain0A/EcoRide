@@ -16,6 +16,17 @@ class AvisRepository extends ServiceEntityRepository
         parent::__construct($registry, Avis::class);
     }
 
+    public function findByStatut($value): array
+        {
+            return $this->createQueryBuilder('a')
+                ->andWhere('a.statut = :val')
+                ->setParameter('val', $value)
+                ->orderBy('a.id', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
     //    /**
     //     * @return Avis[] Returns an array of Avis objects
     //     */
