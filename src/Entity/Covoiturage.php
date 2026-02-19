@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Avis;
+use App\Entity\Utilisateur;
+use App\Entity\Voiture;
 use App\Repository\CovoiturageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -49,11 +52,8 @@ class Covoiturage
     #[ORM\Column(nullable: true)]
     private ?\DateTime $fin_trajet = null;
 
-    /**
-     * @var Collection<int, Utilisateur>
-     */
-    #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'Covoiturages_participe')]
-    private Collection $participants;
+    #[ORM\OneToMany(mappedBy: "covoiturage", targetEntity: CovoiturageParticipant::class, cascade: ["persist", "remove"])]
+    private Collection $CovoiturageParticipant;
 
     #[ORM\ManyToOne(inversedBy: 'Covoiturages_chauffeur')]
     #[ORM\JoinColumn(nullable: false)]
@@ -71,7 +71,7 @@ class Covoiturage
 
     public function __construct()
     {
-        $this->participants = new ArrayCollection();
+        $this->CovoiturageParticipant = new ArrayCollection();
         $this->avis = new ArrayCollection();
     }
 
@@ -212,31 +212,9 @@ class Covoiturage
         return $this;
     }
 
-    /**
-     * @return Collection<int, Utilisateur>
-     */
-    public function getParticipants(): Collection
+    public function getCovoiturageParticipant(): Collection
     {
-        return $this->participants;
-    }
-
-    public function addParticipant(Utilisateur $participant): static
-    {
-        if (!$this->participants->contains($participant)) {
-            $this->participants->add($participant);
-            $participant->addCovoituragesParticipe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipant(Utilisateur $participant): static
-    {
-        if ($this->participants->removeElement($participant)) {
-            $participant->removeCovoituragesParticipe($this);
-        }
-
-        return $this;
+        return $this->CovoiturageParticipant;
     }
 
     public function getChauffeur(): ?Utilisateur
@@ -279,6 +257,16 @@ class Covoiturage
         }
 
         return $this;
+    }
+
+    public function hasAvisFromUser(Utilisateur $user): bool
+    {
+        foreach ($this->avis as $avis) {
+            if ($avis->getPoster() === $user) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getVoiture(): ?Voiture

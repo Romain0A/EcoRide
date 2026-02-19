@@ -7,25 +7,28 @@
 {% block body %}
     {% embed 'header.html.twig' %}
         {% block centre %}
-            <input type"text" id="depart" placeholder="Départ">
-            <input type"text" id="arrivee" placeholder="Arrivée">
-            <input name="date" type="date">
+            
         {% endblock %}
     {% endembed %}
 
-    <div id='trie'>
-        <input type"number" name="prixMax" placeholder="prix Max">
-        <input type"number" name="noteMin" placeholder="note Min">
-        <input type"number" name="dureeMax" placeholder="duree Max">
-        <div>
-            <label for="ecologique">ecologique</label>
-            <input name="ecologique" type="checkbox">
+    {{ form_start(form) }}
+        <div id='trie' class= "vbox_evenly wrap">
+            {{ form_row(form.lieu_depart) }}
+            {{ form_row(form.lieu_arrivee) }}
+            {{ form_row(form.date_depart) }}
+            {{ form_row(form.prix_personne) }}
+            {{ form_row(form.ecologique) }}
+            <button type="submit">Rechercher</button>
         </div>
-    </div>
+    {{ form_end(form) }}
 
-    <div id="listCovoiturage">
+    <div id="listCovoiturage" class="scrolable">
     {% for covoiturage in covoiturages %}
-        {% include 'covoiturage.html.twig' %}
+        <div class="section vbox_evenly wrap">
+            {% if covoiturage.nbPlace > 0 %}
+                {% include 'covoiturage.html.twig' %}
+            {% endif %}
+        </div>
     {% endfor %}
     </div>
 {% endblock %}
