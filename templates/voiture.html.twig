@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Voitures
+{% endblock %}
+
+{% block body %}
+
+    {% embed 'header.html.twig' %} 
+        {% block centre %}
+            <p class="section"><b>Mes voitures</b></p> 
+        {% endblock %}
+    {% endembed %}
+
+<div class="section scrollable">
+    <a href="/mes_voitures/ajouter" class="false_button">Ajouter une voiture</a>
+    <div class="vbox_evenly wrap">
+    {% for voiture in voitures %}
+        <div class="voiture">
+            <p><b>{{ voiture.marque }} {{ voiture.modele }}</b></p>
+            <p>Immatriculation: {{ voiture.immatriculation }}</p>
+            <p>Couleur: {{ voiture.couleur }}</p>
+            <p>Energie: {{ voiture.energie }}</p>
+            <p>Places: {{ voiture.nbPlace }}</p>
+
+            <a href="/mes_voitures/edit/{{ voiture.id }}">Modifier</a>
+
+            <a href="/mes_voitures/supprimer/{{ voiture.id }}" onclick="return confirm('Supprimer cette voiture ?')">Supprimer</a>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
