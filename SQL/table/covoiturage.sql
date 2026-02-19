@@ -8,7 +8,7 @@ create table covoiturage (
     lieu_arrivee varchar(50) not null,
     statut varchar(50) not null,
     nb_place int not null,
-    prix_personne float not null,
+    prix_personne DOUBLE PRECISION not null,
     debut_trajet datetime,
     fin_trajet datetime,
     chauffeur_id int not null,

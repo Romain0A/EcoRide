@@ -6,7 +6,7 @@ CREATE TABLE utilisateur(
     password varchar(255) not null,
     telephone varchar(15) not null,
     adresse varchar(50) not null,
-    date_naissance varchar(50) not null,
+    date_naissance date not null,
     photo varchar(255) not null,
     note smallint not null,
     roles json not null,
