@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Inscription
+{% endblock %}
+
+{% block body %}
+    {% embed 'header.html.twig' %} 
+        {% block centre %}
+            <p class="section"><b>Inscription</b></p>
+        {% endblock %} 
+    {% endembed %}
+    <div class = "section connection scrolable">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">Valider</button>
+        {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}
