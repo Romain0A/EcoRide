@@ -7,19 +7,19 @@
 {% block body %}
     {% embed 'header.html.twig' %}
         {% block centre %}
-            <p id="resumer" class="section">{{ detail.lieuDepart }} - {{ detail.lieuArrivee }} ; {{ detail.dateDepart }} - {{ detail.dateArrivee }} ; {{ detail.heureDepart }} - {{ detail.heureArrivee }} ; {{ detail.place }} place restante ; {{ detail.prix }} credit</p>
+            <p id="resumer" class="section">{{ covoiturage.lieuDepart }} - {{ covoiturage.lieuArrivee }} ; {{ covoiturage.dateDepart|date('d/m/Y') }} - {{ covoiturage.dateArrivee|date('d/m/Y') }} ; {{ covoiturage.heureDepart|date('H:i') }} - {{ covoiturage.heureArrivee|date('H:i') }} ; {{ covoiturage.nbPlace }} place restante ; {{ covoiturage.prixPersonne }} credit</p>
         {% endblock %}
     {% endembed %}
 
     <div class="vbox">
-        <div id="chauffeur" class="section">
+        <div id="chauffeur" class="section column">
             <div class="vboxleft">
-                <img class="pfp img_petite" src={{ detail.pfp }} />
+                <img class="pfp img_petite" src="/{{ covoiturage.chauffeur.photo }}" />
                 <p>
-                    {{ detail.chauffeur }}
+                    {{ covoiturage.chauffeur.pseudo }}
                     <br/>
                     {% for i in 1..5 %}
-                        {% if i <= detail.note %}
+                        {% if i <= covoiturage.chauffeur.note %}
                             ★
                         {% else %}
                             ☆
@@ -28,22 +28,24 @@
                 </p>
             </div><br/>
             <p>
-                preference:<br/>{{ detail.preference }}
+                preference:<br/>{{ covoiturage.chauffeur.preference }}
             </p>
         </div>
 
-        <div id="vehicule" class="section">
+        <div id="vehicule" class="section column">
             <p>vehicule:</p>
-            <p>Modele: {{ detail.modele }}</br>Marque: {{ detail.marque }}</br>Couleur: {{ detail.couleur }}</br>Energie: {{ detail.energie }}</p>
+            <p>Modele: {{ covoiturage.voiture.modele }}</br>Marque: {{ covoiturage.voiture.marque }}</br>Couleur: {{ covoiturage.voiture.couleur }}</br>Energie: {{ covoiturage.voiture.energie }}</p>
         </div>
     </div>
 
     <div id="avisList" class="scrolable section">
-        {% for avis in detail.avis %}
-            {% include 'avis.html.twig' %}
+        {% for avis in covoiturage.chauffeur.avisRecus %}
+            {% if avis.statut == 'valide' %}
+                {% include 'avis.html.twig' %}
+            {% endif %}
         {% endfor %}
     </div>
 
-    <input type="button" id="participer" class="section" value="participer"/>
+    <a href="participer/{{ covoiturage.id }}" class="section connection">Participer</a>
 
 {% endblock %}
