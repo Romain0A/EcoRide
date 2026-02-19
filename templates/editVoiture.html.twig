@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Changer mes voiture
+{% endblock %}
+
+{% block body %}
+    {% embed 'header.html.twig' %} 
+        {% block centre %}{% endblock %}
+    {% endembed %}
+
+    <div class="section connection">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">Valider</button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

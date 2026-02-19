@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edit Profil
+{% endblock %}
+
+{% block body %}
+    {% embed 'header.html.twig' %} 
+        {% block centre %}
+            <p class="section"><b>Modifier mes informations</b></p> 
+        {% endblock %}
+    {% endembed %}
+
+    <div class="section connection">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

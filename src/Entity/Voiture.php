@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Covoiturage;
+use App\Entity\Utilisateur;
 use App\Repository\VoitureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -43,6 +45,9 @@ class Voiture
      */
     #[ORM\OneToMany(targetEntity: Covoiturage::class, mappedBy: 'voiture')]
     private Collection $covoiturages;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $nbPlace = null;
 
     public function __construct()
     {
@@ -164,6 +169,18 @@ class Voiture
                 $covoiturage->setVoiture(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNbPlace(): ?int
+    {
+        return $this->nbPlace;
+    }
+
+    public function setNbPlace(int $nbPlace): static
+    {
+        $this->nbPlace = $nbPlace;
 
         return $this;
     }

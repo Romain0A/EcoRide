@@ -72,11 +72,8 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Voiture::class, mappedBy: 'utilisateur', orphanRemoval: true)]
     private Collection $voitures;
 
-    /**
-     * @var Collection<int, Covoiturage>
-     */
-    #[ORM\ManyToMany(targetEntity: Covoiturage::class, inversedBy: 'participants')]
-    private Collection $Covoiturages_participe;
+    #[ORM\OneToMany(mappedBy: "passager", targetEntity: CovoiturageParticipant::class, cascade: ["persist", "remove"])]
+    private Collection $CovoiturageParticipant;
 
     /**
      * @var Collection<int, Covoiturage>
@@ -99,10 +96,13 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $credit = 20;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $preference = null;
+
     public function __construct()
     {
         $this->voitures = new ArrayCollection();
-        $this->Covoiturages_participe = new ArrayCollection();
+        $this->CovoiturageParticipant = new ArrayCollection();
         $this->Covoiturages_chauffeur = new ArrayCollection();
         $this->avis_poster = new ArrayCollection();
         $this->avis_recus = new ArrayCollection();
@@ -309,28 +309,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Covoiturage>
-     */
-    public function getCovoituragesParticipe(): Collection
+    public function getCovoiturageParticipant(): Collection
     {
-        return $this->Covoiturages_participe;
-    }
-
-    public function addCovoituragesParticipe(Covoiturage $covoituragesParticipe): static
-    {
-        if (!$this->Covoiturages_participe->contains($covoituragesParticipe)) {
-            $this->Covoiturages_participe->add($covoituragesParticipe);
-        }
-
-        return $this;
-    }
-
-    public function removeCovoituragesParticipe(Covoiturage $covoituragesParticipe): static
-    {
-        $this->Covoiturages_participe->removeElement($covoituragesParticipe);
-
-        return $this;
+        return $this->CovoiturageParticipant;
     }
 
     /**
@@ -431,6 +412,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCredit(int $credit): static
     {
         $this->credit = $credit;
+
+        return $this;
+    }
+
+    public function getPreference(): ?string
+    {
+        return $this->preference;
+    }
+
+    public function setPreference(?string $preference): static
+    {
+        $this->preference = $preference;
 
         return $this;
     }

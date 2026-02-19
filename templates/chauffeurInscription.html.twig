@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Chauffeur inscription
+{% endblock %}
+
+{% block body %}
+    {% embed 'header.html.twig' %} 
+        {% block centre %}
+            <p class="section"><b>Chauffeur inscription</b></p>
+        {% endblock %} 
+    {% endembed %}
+    <div class = "section connection scrolable">
+        {{ form_start(form) }}
+
+        {{ form_row(form.voiture.modele) }}
+        {{ form_row(form.voiture.immatriculation) }}
+        {{ form_row(form.voiture.energie) }}
+        {{ form_row(form.voiture.couleur) }}
+        {{ form_row(form.voiture.date_premiere_immatriculation) }}
+        {{ form_row(form.voiture.marque) }}
+        {{ form_row(form.voiture.nbPlace) }}
+
+        {{ form_row(form.fumeur) }}
+        {{ form_row(form.animal) }}
+        {{ form_row(form.preference_libre) }}
+
+        <button type="submit">Valider</button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

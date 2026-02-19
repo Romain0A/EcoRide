@@ -1,74 +1,161 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Espace
+    Espace personelle
 {% endblock %}
 
 {% block body %}
     {% embed 'header.html.twig' %}
-        {% block centre %} <p class="section wrap"> vous etes {{ utilisateur.roleLibelle }} </p> {% endblock %}
+        {% block centre %}
+            <p class="section">
+                Vous êtes
+                {% if is_granted('ROLE_CHAUFFEUR') and is_granted('ROLE_PASSAGER') %}
+                    passager-chauffeur
+                {% elseif is_granted('ROLE_CHAUFFEUR') %}
+                    chauffeur
+                {% elseif is_granted('ROLE_PASSAGER') %}
+                    passager
+                {% else %}
+                    utilisateur
+                {% endif %}
+            </p>
+        {% endblock %}
     {% endembed %}
     <div class="scrolable">
 
         <div class="section">
             <div class="vbox wrap">
-                <img class="pfp img_petite" src={{ utilisateur.pfp }} />
+                <img class="pfp img_petite" src="/{{ utilisateur.photo }}" />
                 <p>Pseudo:<br/> {{ utilisateur.pseudo }}</p>
                 <p>Prenom:<br/> {{ utilisateur.prenom }}</p>
                 <p>Nom:<br/> {{ utilisateur.nom }}</p>
                 <p>Email:<br/> {{ utilisateur.email }}</p>
                 <p>Adresse:<br/> {{ utilisateur.adresse }}</p>
                 <p>Telephone:<br/> {{ utilisateur.telephone }}</p>
-                <p>Date de naissance:<br/> {{ utilisateur.dateNaissance }}</p>
+                <p>Date de naissance:<br/> {{ utilisateur.dateNaissance|date('d/m/Y') }}</p>
             </div>
-            <input type="button" id="info" value="changer mes info"/>
-            <input type="button" id="mdp" value="Changer mon mot de passe"/>
+            <a href="/edit_profil" class="false_button">Changer mes infos</a>
+            <a href="/changer_password" class="false_button">Changer mon mot de passe</a>
+            {% if not is_granted('ROLE_PASSAGER') %}
+                <a href="/devenir_passager" class="false_button">Devenir passager</a>
+            {% endif %}
+            {% if not is_granted('ROLE_CHAUFFEUR') %}
+                <a href="/chauffeur_inscription" class="false_button">Devenir chauffeur</a>
+            {% endif %}
         </div>
 
-        {% if utilisateur.roleId == 2 or utilisateur.roleId == 3 %}
+        {% if is_granted('ROLE_CHAUFFEUR') %}
             <div class="vbox wrap">
                 <div class="section">
                     <p><b>Vos preferences:</b></p>
-                    <p>{{ utilisateur.preferences }}</p>
-                    <input type="button" id="preferences" value="changer mes preferences"/>
+                    <p>{{ utilisateur.preference }}</p>
+                    <a href="/mes_preferences" class="false_button">changer mes preferences</a>
                 </div>
                 <div class="section">
                     <p><b>Vos voitures:</b></p>
-                    {% for voiture in utilisateur.voitures %}
-                        <div class="voiture">
-                            <p>Imatriculation: {{ voiture.imatriculation }} </p>
-                            <p>Date de premiere imatriculation: {{ voiture.dpi }} </p>
-                            <p>Modele du vehicule: {{ voiture.modele }} </p>
-                            <p>Couleur du vehicule: {{ voiture.couleur }} </p>
-                            <p>Marque du vehicule: {{ voiture.marque }} </p>
-                            <p>Nombre de place: {{ voiture.place }} </p>
-                        </div>
-                    {% endfor %}
-                    <input type="button" id="voitures" value="changer mes voitures"/>
+                    <div class="voiture-carousel">
+                        {% for voiture in utilisateur.voitures %}
+                            <div class="voiture-slide {% if not loop.first %}hidden{% endif %}">
+                                <p>Immatriculation: {{ voiture.immatriculation }}</p>
+                                <p>Date de premiere immatriculation: {{ voiture.datePremiereImmatriculation|date('d/m/Y') }}</p>
+                                <p>Modele: {{ voiture.modele }}</p>
+                                <p>Couleur: {{ voiture.couleur }}</p>
+                                <p>Marque: {{ voiture.marque }}</p>
+                                <p>Nombre de place: {{ voiture.nbPlace }}</p>
+                            </div>
+                        {% endfor %}
+                        {% if utilisateur.voitures|length > 1 %}
+                            <div class="fleche">
+                                <button type="button" id="prevVoiture">◀</button>
+                                <button type="button" id="nextVoiture">▶</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <a href="/mes_voitures" class="false_button">Changer mes voitures</a>
                 </div>
                 <div id="nVoyage" class="section wrap">
                     <p><b>Nouveau voyage</b></p>
-                    <input type="text" id="nv_depart" placeholder="Depart"/>
-                    <input type="text" id="nv_arrivee" placeholder="Arrivée"/><br/>
-                    <input type="date" id="nv_date"/>
-                    <input type="text" id="nv_heure_depart" placeholder="Heure depart"/><br/>
-                    <input type="text" id="nv_heure_arrivee" placeholder="Heure arrivée"/>
-                    <input type="text" id="nv_vehicule" placeholder="Vehicule"/><br/>
-                    <input type="text" id="nv_prix" placeholder="Prix"/><br/><br/>
-                    <input type="button" id="nouveau_voyage" value="Confirmer"/>
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <button type="submit">Valider</button>
+                    {{ form_end(form) }}
                 </div>
             </div>
         {% endif %}
 
-        {% if utilisateur.roleId != 0 %}
+        {% if is_granted('ROLE_PASSAGER') or is_granted('ROLE_CHAUFFEUR') %}
             <div class="section scrolable">
+                <p><b>Historique des covoiturages:</b></p>
                 {% for covoiturage in covoiturages %}
                     <div class="sous_section vbox_evenly wrap">
                         {% include 'covoiturage.html.twig' %}
+                        {% block status %} 
+                            {% if covoiturage.chauffeur == utilisateur %}
+                                {% if covoiturage.statut == "planifier" %}
+                                    <a href="/covoiturage/{{ covoiturage.id }}/demarrer">
+                                        <button>Démarrer</button>
+                                    </a>
+                                {% elseif covoiturage.statut == "demarrer" %}
+                                    <a href="/covoiturage/{{ covoiturage.id }}/terminer">
+                                        <button>Arrivée à destination</button>
+                                    </a>
+                                {% elseif covoiturage.statut == "terminer" %}
+                                    <p>Voyage terminer</p>
+                                {% endif %}
+                            {% endif %}
+
+                            {% if covoiturage.chauffeur != utilisateur %}
+                                {% if covoiturage.statut == "terminer" %}
+
+                                    {% set participe = null %}
+                                    {% for participation in covoiturage.CovoiturageParticipant %}
+                                        {% if participation.passager == utilisateur %}
+                                            {% set participe = participation %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if not participe.confirme %}
+                                        <a href="/confirmer/{{ covoiturage.id }}">
+                                            <button>Valider</button>
+                                        </a>
+                                        <a href="/malpasse/{{ covoiturage.id }}">
+                                            <button>Signaler un propleme</button>
+                                        </a>
+                                    {% elseif not covoiturage.hasAvisFromUser(utilisateur)%}
+                                        <a href="/avis/{{ covoiturage.id }}">
+                                            <button>Laisser un avis</button>
+                                        </a>                                        
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+
+                        {% endblock %}
                     </div>
                 {% endfor %}
             </div>
         {% endif %}
 
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const slides = document.querySelectorAll('.voiture-slide');
+            if (slides.length <= 1) return;
+
+            let index = 0;
+
+            document.getElementById('nextVoiture').addEventListener('click', function () {
+                slides[index].classList.add('hidden');
+                index = (index + 1) % slides.length;
+                slides[index].classList.remove('hidden');
+            });
+
+            document.getElementById('prevVoiture').addEventListener('click', function () {
+                slides[index].classList.add('hidden');
+                index = (index - 1 + slides.length) % slides.length;
+                slides[index].classList.remove('hidden');
+            });
+        });
+    </script>
 {% endblock %}

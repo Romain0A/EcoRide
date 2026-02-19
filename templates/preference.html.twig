@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edit preference
+{% endblock %}
+
+{% block body %}
+    {% embed 'header.html.twig' %} 
+        {% block centre %}
+            <p class="section"><b>Modifier mes preference</b></p> 
+        {% endblock %}
+    {% endembed %}
+
+    <div class="section connection ">
+        {{ form_start(form) }}
+            {{ form_label(form.preference) }}
+            <br>
+            {{ form_widget(form.preference) }}
+            <br>
+            <button type="submit">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
