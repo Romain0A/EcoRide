@@ -6,13 +6,11 @@
 
 {% block body %}
     {% embed 'header.html.twig' %}
-        {% block centre %}
-            <input type="search" class="bar_recherche"/>
-        {% endblock %}
+        {% block centre %}{% endblock %}
     {% endembed %}
-    <div id="accueil">
+    <div id="accueil" class="scrolable">
         <div class="vbox">
-            <img src='img\pexels-kindelmedia-8550825.jpg' alt="Photo de deux personnes à l'avant d'une voiture, prise depuis le siège arrière"/>
+            <img src='\img\pexels-kindelmedia-8550825.jpg' alt="Photo de deux personnes à l'avant d'une voiture, prise depuis le siège arrière"/>
             <div>
                 <p>
                     EcoRide est une startup dont le but est de réduire l'impact environnemental des déplacements en vous aidant à trouver le bon covoiturage pour vous et pour la planète, des covoiturages à la fois économiques et écologiques.
@@ -37,7 +35,7 @@
                     C'est pour cela que nous cherchons à encourager le covoiturage afin de protéger notre environnement et par la même occasion permettre des trajets plus économes pour notre porte-feuille et également plus conviviaux.
                 </p>
             </div>
-            <img src='img\pexels-kindelmedia-9799998.jpg' alt="Photo d'une voiture électrique noire en train d'être rechargée sur un parking"/>
+            <img src='\img\pexels-kindelmedia-9799998.jpg' alt="Photo d'une voiture électrique noire en train d'être rechargée sur un parking"/>
         </div>
     </div>
     <footer>
