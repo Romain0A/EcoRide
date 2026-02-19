@@ -1,6 +1,7 @@
 create table covoiturage_participant(
     covoiturage_id int not null,
     utilisateur_id int not null,
+    confirme TINYINT(1) NOT NULL DEFAULT 0,
 
     primary key (covoiturage_id,utilisateur_id),
 
