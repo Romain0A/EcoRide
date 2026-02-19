@@ -1,3 +1,220 @@
-body {
-    background-color: skyblue;
+html, body {
+    background-image: url("../fond/pexels-minan1398-1353938.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.vbox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1em;
+}
+
+.vbox_evenly{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+    padding: 1em;
+}
+
+.vboxleft{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1em;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.section{
+    background-color: #AFE1AF;
+    border-radius: 15px;
+    margin: 3%;
+    padding: 1em;
+    max-height: 90vh;
+}
+
+.sous_section{
+    border-radius: 15px;
+    padding: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    background-color: #E1D4AF;
+}
+
+.connection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input{
+        margin: 1em;
+    }
+}
+
+.scrolable{
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.wrap{
+    flex-wrap: wrap;
+    gap:2vh;
+    text-align: center;
+}
+
+.pfp{
+    border-radius: 100%;
+}
+
+.img_petite{
+    height: 4em;
+    width: 4em;
+}
+
+.false_button{
+    border-radius: 6px;
+    text-align: center;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: buttonface;
+    color: buttontext;
+    white-space: pre;
+    padding-block: 1px;
+    padding-inline: 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+}
+
+.hidden {
+    display: none;
+}
+
+.voiture-carousel {
+    position: relative;
+}
+
+.fleche {
+    margin: 1em;
+}
+
+footer{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #AFE1AF;
+    align-items: center;
+    height: 7.5vh;
+    min-height: 30px;
+    margin-top: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 7.5vh;
+    min-height: 30px;
+}
+
+input{
+    border-radius: 6px;
+}
+
+#logo, #menu{
+    background-color: #AFE1AF;
+    width: 20%;
+    align-items: center;
+}
+
+#logo{
+    border-bottom-right-radius: 15px;
+    text-align: center;
+    h1{
+        font-size: clamp(16px, 3vh, 50px);
+    }
+}
+
+#menu{
+    border-bottom-left-radius: 15px;
+    display: flex;
+    justify-content: space-evenly;
+
+    img{
+        width: 60%;
+        height: 75%;
+        max-height: 10vh;
+        min-height: 30px;
+        object-fit: contain
+    }
+
+    a{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+#centreHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 58%;
+}
+
+#centreHeader .section {
+    margin: 0;
+}
+
+#accueil{
+    align-items: center;
+    justify-content: space-between;
+    gap: 4%;
+    margin: 3%;
+
+    img {
+        width: 30%;
+        height: auto;
+        border-radius: 15px;
+        object-fit: contain;
+    }
+}
+
+#chauffeur, #vehicule{
+    width: 45%;
+}
+
+#trie{
+    margin: 1%;
+
+    input{
+    border-radius: 6px;
+    }
+}
+
+#participer{
+    width: 30%;
+    align-self: center;
+    border-color: transparent;
+    margin: 1em;
+}
+
+#nVoyage{
+    input{
+        width: 10em;
+    }
 }
