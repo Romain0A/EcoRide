@@ -12,8 +12,13 @@
             {% embed 'avis.html.twig' %} 
                 {% block boutton_validation %}
                     <div>
-                        <input type="button" id="accepter" value="accepter"/>
-                        <input type="button" id="refuser" value="refuser"/>
+                        <a href="{{ path('app_avis_accepter', {id: avis.id}) }}">
+                            <button>Accepter</button>
+                        </a>
+
+                        <a href="{{ path('app_avis_refuser', {id: avis.id}) }}">
+                            <button>Refuser</button>
+                        </a>
                     </div>
                 {% endblock %}
             {% endembed %}
